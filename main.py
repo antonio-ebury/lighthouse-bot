@@ -25,6 +25,18 @@ class BotGame:
         self.initial_state = None
         self.turn_states = []
         self.countT = 1
+        self.direction = {1,1}
+
+    def next_direction(self, currentDirection):
+        if (1,1) == currentDirection:
+            self.direction = (1,6)
+        if (1, 6) == currentDirection:
+            self.direction = (6, 6)
+        if (6, 6) == currentDirection:
+            self.direction = (6, 1)
+        if (6, 1) == currentDirection:
+            self.direction = (1, 1)
+
 
     def new_turn_action(self, turn: game_pb2.NewTurn) -> game_pb2.NewAction:
         cx, cy = turn.Position.X, turn.Position.Y
@@ -65,10 +77,8 @@ class BotGame:
 
                     self.countT += 1
                     return action
-
-            # 60% de posibilidades de atacar el faro
-            if random.randrange(100) < 60:
-                energy = random.randrange(turn.Energy + 1)
+            else:
+                energy = turn.Energy
                 action = game_pb2.NewAction(
                     Action=game_pb2.ATTACK,
                     Energy=energy,
@@ -81,12 +91,23 @@ class BotGame:
                 return action
 
         # Mover aleatoriamente
-        moves = ((-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1))
-        move = random.choice(moves)
+        if (self.direction == (cx, cy)):
+            self.direction = nextDirection(self.direction)
+        xMove = 0
+        if (self.direction[0] < cx):
+            xMove = -1
+        if (self.direction[0] > cx):
+            xMove = 1
+        yMove = 0
+        if (self.direction[1] < cy):
+            yMove = -1
+        if (self.direction[1] < cy):
+            yMove = 1
+
         action = game_pb2.NewAction(
             Action=game_pb2.MOVE,
             Destination=game_pb2.Position(
-                X=turn.Position.X + move[0], Y=turn.Position.Y + move[1]
+                X=turn.Position.X + xMove, Y=turn.Position.Y + yMove
             ),
         )
 
