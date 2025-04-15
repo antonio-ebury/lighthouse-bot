@@ -203,6 +203,7 @@ class ClientServer(game_grpc.GameServiceServicer):
         if self.verbose:
             print(json_format.MessageToJson(request))
         action = self.bg.new_turn_action(request)
+        print(f"doaing action: {action}")
         return action
 
 
