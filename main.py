@@ -103,7 +103,7 @@ class BotGame:
         yMove = 0
         if (self.direction[1] < cy):
             yMove = -1
-        if (self.direction[1] < cy):
+        if (self.direction[1] > cy):
             yMove = 1
 
         action = game_pb2.NewAction(
