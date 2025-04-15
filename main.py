@@ -26,6 +26,7 @@ class BotGame:
         self.turn_states = []
         self.countT = 1
         self.direction = (1,1)
+        self.last_action = None
 
     def next_direction(self):
         if self.direction[0] == 1 and self.direction[1] == 1:
@@ -74,10 +75,10 @@ class BotGame:
                     )
                     bgt = BotGameTurn(turn, action)
                     self.turn_states.append(bgt)
-
+                    self.last_action = game_pb2.CONNECT
                     self.countT += 1
                     return action
-            else:
+            elif self.last_action != game_pb2.ATTACK:
                 energy = turn.Energy
                 action = game_pb2.NewAction(
                     Action=game_pb2.ATTACK,
@@ -86,7 +87,7 @@ class BotGame:
                 )
                 bgt = BotGameTurn(turn, action)
                 self.turn_states.append(bgt)
-
+                self.last_action = game_pb2.ATTACK
                 self.countT += 1
                 return action
         print(f"BEFORE MOVing: {self.direction}, {cx}, {cy}")
@@ -115,7 +116,7 @@ class BotGame:
 
         bgt = BotGameTurn(turn, action)
         self.turn_states.append(bgt)
-
+        self.last_action = game_pb2.MOVE
         self.countT += 1
         return action
 
