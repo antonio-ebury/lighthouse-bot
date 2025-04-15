@@ -96,6 +96,7 @@ class BotGame:
         # Mover aleatoriamente
         if (self.direction[0] == cx and self.direction[1] == cy):
             self.next_direction()
+        print(f"direction now: {self.direction}")
         xMove = 0
         if (self.direction[0] < cx):
             xMove = -1
@@ -106,7 +107,7 @@ class BotGame:
             yMove = -1
         if (self.direction[1] > cy):
             yMove = 1
-
+        print(f"moving to: {xMove} {yMove}")
         action = game_pb2.NewAction(
             Action=game_pb2.MOVE,
             Destination=game_pb2.Position(
