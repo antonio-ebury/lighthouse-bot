@@ -46,7 +46,7 @@ class BotGame:
             lighthouses[(lh.Position.X, lh.Position.Y)] = lh
 
         # Si estamos en un faro...
-        if (cx, cy) in lighthouses:
+        if (cx, cy) in lighthouses & self.countT > 10:
             # Conectar con faro remoto válido si podemos
             if lighthouses[(cx, cy)].Owner == self.player_num:
                 possible_connections = []
