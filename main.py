@@ -25,16 +25,16 @@ class BotGame:
         self.initial_state = None
         self.turn_states = []
         self.countT = 1
-        self.direction = {1,1}
+        self.direction = (1,1)
 
-    def next_direction(self, currentDirection):
-        if (1,1) == currentDirection:
+    def next_direction(self):
+        if (1,1) == self.direction:
             self.direction = (1,6)
-        if (1, 6) == currentDirection:
+        if (1, 6) == self.direction:
             self.direction = (6, 6)
-        if (6, 6) == currentDirection:
+        if (6, 6) == self.direction:
             self.direction = (6, 1)
-        if (6, 1) == currentDirection:
+        if (6, 1) == self.direction:
             self.direction = (1, 1)
 
 
@@ -89,10 +89,12 @@ class BotGame:
 
                 self.countT += 1
                 return action
+        print(f"BEFORE MOVing: {self.direction}, {cx}, {cy}")
+        print(f"checking: {self.direction[0] == cx} {self.direction[1] == cy}")
 
         # Mover aleatoriamente
-        if (self.direction == (cx, cy)):
-            self.next_direction(self.direction)
+        if (self.direction[0] == cx & self.direction[1] == cy):
+            self.next_direction()
         xMove = 0
         if (self.direction[0] < cx):
             xMove = -1
