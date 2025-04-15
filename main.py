@@ -46,7 +46,7 @@ class BotGame:
             lighthouses[(lh.Position.X, lh.Position.Y)] = lh
 
         # Si estamos en un faro...
-        if (cx, cy) in lighthouses & self.countT > 10:
+        if (cx, cy) in lighthouses and self.countT>10:
             # Conectar con faro remoto válido si podemos
             if lighthouses[(cx, cy)].Owner == self.player_num:
                 possible_connections = []
@@ -93,7 +93,7 @@ class BotGame:
         print(f"checking: {self.direction[0] == cx} {self.direction[1] == cy}")
 
         # Mover aleatoriamente
-        if (self.direction[0] == cx & self.direction[1] == cy):
+        if (self.direction[0] == cx and self.direction[1] == cy):
             self.next_direction()
         xMove = 0
         if (self.direction[0] < cx):
