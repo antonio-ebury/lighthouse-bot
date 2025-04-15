@@ -92,7 +92,7 @@ class BotGame:
 
         # Mover aleatoriamente
         if (self.direction == (cx, cy)):
-            self.direction = nextDirection(self.direction)
+            self.next_direction(self.direction)
         xMove = 0
         if (self.direction[0] < cx):
             xMove = -1
