@@ -28,13 +28,13 @@ class BotGame:
         self.direction = (1,1)
 
     def next_direction(self):
-        if (1,1) == self.direction:
+        if self.direction[0] == 1 and self.direction[1] == 1:
             self.direction = (1,6)
-        if (1, 6) == self.direction:
+        if self.direction[0] == 1 and self.direction[1] == 6:
             self.direction = (6, 6)
-        if (6, 6) == self.direction:
+        if self.direction[6] == 6 and self.direction[1] == 6:
             self.direction = (6, 1)
-        if (6, 1) == self.direction:
+        if self.direction[0] == 6 and self.direction[1] == 1:
             self.direction = (1, 1)
 
 
@@ -203,7 +203,7 @@ class ClientServer(game_grpc.GameServiceServicer):
         if self.verbose:
             print(json_format.MessageToJson(request))
         action = self.bg.new_turn_action(request)
-        print(f"doaing action: {action}")
+        print(f"doing action: {action}")
         return action
 
 
