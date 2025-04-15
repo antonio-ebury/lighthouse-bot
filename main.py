@@ -39,7 +39,7 @@ class BotGame:
             if lighthouses[(cx, cy)].Owner == self.player_num:
                 possible_connections = []
                 for dest in lighthouses:
-                    # No conectar con sigo mismo
+                    # No conectar consigo mismo
                     # No conectar si no tenemos la clave
                     # No conectar si ya existe la conexión
                     # No conectar si no controlamos el destino
