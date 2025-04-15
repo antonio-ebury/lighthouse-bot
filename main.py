@@ -33,7 +33,7 @@ class BotGame:
             self.direction = (1,6)
         elif self.direction[0] == 1 and self.direction[1] == 6:
             self.direction = (6, 6)
-        elif self.direction[6] == 6 and self.direction[1] == 6:
+        elif self.direction[0] == 6 and self.direction[1] == 6:
             self.direction = (6, 1)
         elif self.direction[0] == 6 and self.direction[1] == 1:
             self.direction = (1, 1)
